@@ -1,17 +1,22 @@
 body{
   background-image: url("../public/bg.jpg");
   background-size: cover;
+  color: white
+}
 
+.CompaniesList{
+  position: relative;
 }
 
 a {
   text-decoration: none;
+  color: white;
 }
 
 .compLogo {
   height: 50px;
   position: absolute;
-  right: 5%;
+  right: 2%;
 }
 
 .App {
