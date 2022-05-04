@@ -3,6 +3,11 @@ import JoblyApi from "./api";
 import SearchForm from "./SearchForm";
 import JobsList from "./JobsList";
 
+/** Jobs component handling page for Jobs
+ * 
+ * state: jobs {jobsList, searchQuery, isLoading}
+ * props: none
+ */
 function Jobs() {
   const [jobs, setJobs] = useState({
     jobsList: [],
@@ -39,7 +44,7 @@ function Jobs() {
 
   return (
     <div>
-      <SearchForm handleSearch={handleSearch} />
+      <SearchForm searchFor={"title"} handleSearch={handleSearch} />
       <JobsList jobs={jobs.jobsList} />
     </div>
   );

@@ -1,3 +1,6 @@
+/** Presentational component for each job in job list
+ * props: job
+ */
 function Job({ job }) {
   return (
     <div className="bg-dark my-3 d-flex p-3">

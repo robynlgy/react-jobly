@@ -1,8 +1,11 @@
-import {  useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
-import JobsList  from "./JobsList"
+import JobsList from "./JobsList"
 
+/** Component for showing company details and list of Jobs
+ * state: company {data, isLoading}
+ */
 function Company() {
   const { name } = useParams();
   const [company, setCompany] = useState({
@@ -19,7 +22,7 @@ function Company() {
       if (company.isLoading) fetchCompanyFromAPI();
     },
     [company]
-    );
+  );
 
   if (company.isLoading) return <div>Loading...</div>
 
@@ -27,7 +30,7 @@ function Company() {
     <div>
       <h1>{company.data.name}</h1>
       <p>{company.data.description}</p>
-      <JobsList jobs = {company.data.jobs} />
+      <JobsList jobs={company.data.jobs} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+/** Nav component with links to home, companies, and jobs components */
 function NavBar() {
     return (
         <nav className="NavBar navbar navbar-dark bg-dark">

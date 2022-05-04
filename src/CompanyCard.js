@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 
+/** Presentational Component for each list item in list of Companies, 
+ * linking to their detail page
+ * props: company
+ */
 function CompanyCard({ company }) {
     return (
         <Link to={`/companies/${company.handle}`}>

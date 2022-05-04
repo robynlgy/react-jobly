@@ -1,7 +1,12 @@
 import { useState } from "react";
 
-function SearchForm({ handleSearch }) {
-  const [formData, setFormData] = useState({ name: "" });
+/** Form component used for searching jobs/companies
+ * props: searchFor, handleSearch
+ * state: formData
+ */
+function SearchForm({ searchFor, handleSearch }) {
+  const initialState = (searchFor === "name") ? { name: "" } : { title: "" };
+  const [formData, setFormData] = useState(initialState);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -22,11 +27,11 @@ function SearchForm({ handleSearch }) {
     <div className="mb-3">
       <input
         id="search-form"
-        name="name"
+        name={searchFor}
         className="form-control"
         placeholder="Enter search term.."
         onChange={handleChange}
-        value={formData.name}
+        value={formData.searchFor}
         aria-label="search-form"
       />
     </div>
