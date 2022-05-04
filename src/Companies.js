@@ -40,7 +40,7 @@ function Companies() {
   return (
     <div>
       <SearchForm handleSearch={handleSearch} />
-      <CompaniesList companies={companies} />
+      <CompaniesList companies={companies.companiesList} />
     </div>
   );
 }

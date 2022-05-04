@@ -4,6 +4,16 @@ body{
 
 }
 
+a {
+  text-decoration: none;
+}
+
+.compLogo {
+  height: 50px;
+  position: absolute;
+  right: 5%;
+}
+
 .App {
   text-align: center;
   height: 1000px;

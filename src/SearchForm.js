@@ -33,9 +33,9 @@ function SearchForm({ handleSearch }) {
   );
 
   return (
-    <form className="SearchForm my-3" onSubmit={handleSubmit}>
+    <form className="SearchForm my-3 d-flex justify-content-center" onSubmit={handleSubmit}>
       {formInputsHTML}
-      <button className="SearchForm-Btn btn-primary btn">
+      <button className="SearchForm-Btn btn-primary btn ms-3 py-1 btn-sm">
         Search
       </button>
     </form>
