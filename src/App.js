@@ -4,40 +4,66 @@ import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList";
 import NavBar from "./NavBar";
 import UserContext from "./UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 
 function App() {
-
-  const [user, setUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function signup(formData) {
-    const response = await JoblyApi.request("/auth/register", { ...formData }, "post");
+    const response = await JoblyApi.signup(formData);
 
-    setToken(response.data.token);
-    setUser(JSON.parse(atob(response.data.token.split('.')[1])));
+    JoblyApi.token = response;
+    setToken(response);
+    // setCurrentUser(JSON.parse(atob(response.token.split('.')[1])));
   }
 
   async function login(formData) {
-    const response = await JoblyApi.request("/auth/token", { ...formData }, "post");
+    const response = await JoblyApi.login(formData);
 
-    setToken(response.data.token);
-    setUser(JSON.parse(atob(response.data.token.split('.')[1])));
+    JoblyApi.token = response;
+    setToken(response);
+    // setCurrentUser(JSON.parse(atob(response.data.token.split('.')[1])));
   }
 
-  async function updateProfile(formData) {
-    const response = await JoblyApi.request(("/users/" + user.username), { ...formData }, "patch");
+  // async function updateProfile(formData) {
+  //   const response = await JoblyApi.request(
+  //     "users/" + currentUser.username,
+  //     { ...formData },
+  //     "patch"
+  //   );
 
-    setUser({ ...user }, response.data);
-  }
+  //   setCurrentUser((prevUser) => ({ ...prevUser, ...response.user }));
+  // }
+
+  useEffect(
+    function getUser() {
+      async function getNewUser() {
+        const username = JSON.parse(atob(token.split(".")[1])).username;
+        const response = await JoblyApi.getUser(username);
+        setCurrentUser((prevUser) => ({
+          ...prevUser,
+          ...response,
+        }));
+        setIsLoading(false)
+      }
+      if (isLoading && token) getNewUser();
+    },
+    [token]
+  );
 
   return (
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ currentUser }}>
       <div className="App">
         <BrowserRouter>
           <NavBar />
-          <RoutesList />
+          <RoutesList
+            signup={signup}
+            login={login}
+            // updateProfile={updateProfile}
+          />
         </BrowserRouter>
       </div>
     </UserContext.Provider>
