@@ -15,7 +15,7 @@ function RoutesList({ signup, login, updateProfile }) {
       <Route path="/companies" element={<Companies />} />
       <Route path="/companies/:name" element={<Company />} />
       <Route path="/jobs" element={<Jobs />} />
-      {/* <Route path="/login" element={<LoginForm login={login} />} /> */}
+      <Route path="/login" element={<LoginForm login={login} />} />
       <Route path="/signup" element={<SignupForm signup={signup} />} />
       {/* <Route
         path="/profile"

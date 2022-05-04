@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,7 +17,6 @@ function App() {
 
     JoblyApi.token = response;
     setToken(response);
-    // setCurrentUser(JSON.parse(atob(response.token.split('.')[1])));
   }
 
   async function login(formData) {
@@ -25,7 +24,12 @@ function App() {
 
     JoblyApi.token = response;
     setToken(response);
-    // setCurrentUser(JSON.parse(atob(response.data.token.split('.')[1])));
+  }
+
+  function logout() {
+    setCurrentUser(null);
+    setToken(null);
+    setIsLoading(true);
   }
 
   // async function updateProfile(formData) {
@@ -58,11 +62,12 @@ function App() {
     <UserContext.Provider value={{ currentUser }}>
       <div className="App">
         <BrowserRouter>
-          <NavBar />
+          <NavBar logout={logout} />
           <RoutesList
             signup={signup}
             login={login}
-            // updateProfile={updateProfile}
+            logout={logout}
+          // updateProfile={updateProfile}
           />
         </BrowserRouter>
       </div>
