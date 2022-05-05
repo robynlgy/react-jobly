@@ -34,6 +34,7 @@ function SignupForm({ signup }) {
       setFormData(initialValue);
       navigate("/");
     } catch (err) {
+      console.log("ERROR",err)
       return <Alert errors={err} />;
     }
   }

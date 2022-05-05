@@ -6,64 +6,75 @@ import NavBar from "./NavBar";
 import UserContext from "./UserContext";
 import { useEffect, useState } from "react";
 import JoblyApi from "./api";
+import jwt from "jwt-decode"
 
+/** App with user auth methods for jobly application
+ *
+ * state: currentUser, token, isLoading
+ * props: none
+*/
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(true);
 
-  async function signup(formData) {
-    const response = await JoblyApi.signup(formData);
 
+  async function signup(formData) {
+    setIsLoading(true)
+    const response = await JoblyApi.signup(formData);
     JoblyApi.token = response;
     setToken(response);
+    setIsLoading(false)
   }
 
   async function login(formData) {
+    setIsLoading(true)
     const response = await JoblyApi.login(formData);
-
     JoblyApi.token = response;
     setToken(response);
+    setIsLoading(false)
   }
 
   function logout() {
     setCurrentUser(null);
     setToken(null);
     JoblyApi.token = null;
-    setIsLoading(true);
     localStorage.clear();
   }
 
-  // async function updateProfile(formData) {
-  //   const response = await JoblyApi.request(
-  //     "users/" + currentUser.username,
-  //     { ...formData },
-  //     "patch"
-  //   );
+  async function updateProfile(formData) {
+    const response = await JoblyApi.request(
+      "users/" + currentUser.username,
+      { ...formData },
+      "patch"
+    );
 
-  //   setCurrentUser((prevUser) => ({ ...prevUser, ...response.user }));
-  // }
+    setCurrentUser((prevUser) => ({ ...prevUser, ...response.user }));
+  }
 
+  /** useEffect runs on initial render and on changes in token state
+   *  - makes request to API for user details from token payload
+   *  - updates currentUser and sets token in localStorage
+   */
   useEffect(
     function getUser() {
       async function getNewUser() {
-        const username = JSON.parse(atob(token.split(".")[1])).username;
+        const username = jwt(token).username;
+        // JSON.parse(atob(token.split(".")[1])).username;
         const response = await JoblyApi.getUser(username);
-        setCurrentUser((prevUser) => ({
-          ...prevUser,
-          ...response,
-        }));
+        setCurrentUser({ ...response,});
         localStorage.setItem("token", token);
         setIsLoading(false);
       }
-      setToken(localStorage.getItem("token")); // token would be null or token
-      console.log("token",token)
-      if (isLoading && token) {
-        console.log("in if statement")
+      if (token) {
+        JoblyApi.token = token;
         getNewUser();
-    }},
+      }
+    },
     [token]
   );
+
+  if (isLoading) return <div>...loading</div>
 
   return (
     <UserContext.Provider value={{ currentUser }}>
@@ -74,7 +85,7 @@ function App() {
             signup={signup}
             login={login}
             logout={logout}
-            // updateProfile={updateProfile}
+            updateProfile={updateProfile}
           />
         </BrowserRouter>
       </div>
