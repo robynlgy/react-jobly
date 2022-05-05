@@ -1,6 +1,6 @@
 function Alert({ errors }) {
   return (
-    <div className="alert-danger">
+    <div className="alert alert-warning">
       {errors.map((error) => (
         <p>{error}</p>
       ))}
