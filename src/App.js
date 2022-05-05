@@ -17,7 +17,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(true);
-
+  const [alerts, setAlerts] = useState(null);
 
   async function signup(formData) {
     setIsLoading(true)
@@ -43,13 +43,12 @@ function App() {
   }
 
   async function updateProfile(formData) {
-    const response = await JoblyApi.request(
-      "users/" + currentUser.username,
-      { ...formData },
-      "patch"
+    const response = await JoblyApi.updateProfile(
+      currentUser.username,
+      { ...formData }
     );
 
-    setCurrentUser((prevUser) => ({ ...prevUser, ...response.user }));
+    setCurrentUser(response);
   }
 
   /** useEffect runs on initial render and on changes in token state
@@ -62,13 +61,15 @@ function App() {
         const username = jwt(token).username;
         // JSON.parse(atob(token.split(".")[1])).username;
         const response = await JoblyApi.getUser(username);
-        setCurrentUser({ ...response,});
+        setCurrentUser({ ...response, });
         localStorage.setItem("token", token);
         setIsLoading(false);
       }
       if (token) {
         JoblyApi.token = token;
         getNewUser();
+      } else {
+        setIsLoading(false);
       }
     },
     [token]

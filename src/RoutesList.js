@@ -20,7 +20,7 @@ function RoutesList({ signup, login, updateProfile }) {
         <Route path="/companies" element={<Companies />} />
         <Route path="/companies/:name" element={<Company />} />
         <Route path="/jobs" element={<Jobs />} />
-        {/* <Route path="/profile" element={<ProfileForm updateProfile={updateProfile} />} /> */}
+        <Route path="/profile" element={<ProfileForm updateProfile={updateProfile} />} />
       </Routes>
     );
   } else {

@@ -66,8 +66,8 @@ class JoblyApi {
   /** Login User and return token*/
 
   static async login(data) {
-      let res = await this.request(`auth/token`, data, "post");
-      return res.token;
+    let res = await this.request(`auth/token`, data, "post");
+    return res.token;
 
   }
 
@@ -75,6 +75,13 @@ class JoblyApi {
 
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  /** Update User detail*/
+
+  static async updateProfile(username, formData) {
+    let res = await this.request(`users/${username}`, formData, "patch");
     return res.user;
   }
 }
