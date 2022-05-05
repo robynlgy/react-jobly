@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import SearchForm from "./SearchForm";
 import CompaniesList from "./CompaniesList";
+import LoadingSpinner from "./LoadingSpinner";
 
 /** Companies component handling page for Companies
- * 
+ *
  * state: jobs {companiesList, searchQuery, isLoading}
  * props: none
  */
@@ -40,7 +41,7 @@ function Companies() {
     }));
   }
 
-  // if (companies.isLoading) return <div>....Loading</div>
+  if (companies.isLoading) return < LoadingSpinner />
 
   return (
     <div>

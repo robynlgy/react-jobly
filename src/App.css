@@ -1,16 +1,65 @@
 body {
-  background-image: url("../public/bg.jpg");
+  background-image: url("https://images.unsplash.com/photo-1576502202167-791eca35a78d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1181&q=80");
   background-size: cover;
-  color: white
 }
 
 .CompaniesList {
   position: relative;
 }
 
+.CompanyCard{
+  color:rgb(56, 50, 50);
+}
+
 a {
   text-decoration: none;
   color: white;
+}
+
+
+.navbar-brand{
+  font-size:xx-large;
+}
+
+.nav-link{
+  font-size:large;
+  color:white;
+}
+
+.custom-form{
+  border-radius:20px;
+  width: 40%;
+  padding: 25px;
+  margin-top: 100px;
+}
+
+.CompanyCard, .JobCard{
+  border-radius:20px;
+}
+
+label{
+  font-weight:bold
+}
+
+.form-control{
+  width: 50%;
+  text-align:center;
+  margin: 20px auto;
+}
+
+.form-search-input {
+  width:500px;
+  margin: 5px auto ;
+}
+.SearchForm-Btn{
+  height: 36px;
+  margin: auto 0;
+}
+
+.SearchForm{
+  height: 50px;
+  width: 50%;
+  margin: 10px auto;
 }
 
 .compLogo {
@@ -26,6 +75,9 @@ a {
 
 .HomePage {
   margin-top: 300px;
+  color: white;
+  font-weight: bold;
+  text-shadow:#282c34 1px 1px
 }
 
 .App-logo {
@@ -63,3 +115,6 @@ a {
     transform: rotate(360deg);
   }
 }
+
+
+

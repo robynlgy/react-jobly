@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import SearchForm from "./SearchForm";
 import JobsList from "./JobsList";
+import LoadingSpinner from "./LoadingSpinner";
 
 /** Jobs component handling page for Jobs
- * 
+ *
  * state: jobs {jobsList, searchQuery, isLoading}
  * props: none
  */
@@ -40,7 +41,7 @@ function Jobs() {
     }));
   }
 
-  if (jobs.isLoading) return <div>....Loading</div>
+  if (jobs.isLoading) return < LoadingSpinner />
 
   return (
     <div>

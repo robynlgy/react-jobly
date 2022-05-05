@@ -26,6 +26,7 @@ function LoginForm({ login }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         login(formData);
+
         setFormData(initialValue);
         navigate("/");
     }
@@ -59,7 +60,7 @@ function LoginForm({ login }) {
     );
 
     return (
-        <form className="LoginForm my-3 justify-content-center container" onSubmit={handleSubmit}>
+        <form className="custom-form justify-content-center container bg-light" onSubmit={handleSubmit}>
             {formInputsHTML}
             <button className="LoginForm-Btn btn-primary btn ms-3 py-1 btn-sm">
                 Login

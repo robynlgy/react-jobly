@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
-import JobsList from "./JobsList"
+import JobsList from "./JobsList";
+import LoadingSpinner from "./LoadingSpinner";
 
 /** Component for showing company details and list of Jobs
  * state: company {data, isLoading}
@@ -24,12 +25,14 @@ function Company() {
     [company]
   );
 
-  if (company.isLoading) return <div>Loading...</div>
+  if (company.isLoading) return < LoadingSpinner />
 
   return (
-    <div>
-      <h1>{company.data.name}</h1>
-      <p>{company.data.description}</p>
+    <div className="mt-5">
+      <h1 style={{ color: "white", "text-shadow": "#282c34 1px 1px" }}>
+        {company.data.name}
+      </h1>
+      <p style={{ color: "white","text-shadow": "#282c34 1px 1px" }}>{company.data.description}</p>
       <JobsList jobs={company.data.jobs} />
     </div>
   );

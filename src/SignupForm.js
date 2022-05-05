@@ -98,7 +98,7 @@ function SignupForm({ signup }) {
 
   return (
     <form
-      className="SignupForm my-3 justify-content-center container"
+      className="custom-form justify-content-center container bg-light"
       onSubmit={handleSubmit}
     >
       {formInputsHTML}

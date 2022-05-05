@@ -28,7 +28,7 @@ function SearchForm({ searchFor, handleSearch }) {
       <input
         id="search-form"
         name={searchFor}
-        className="form-control"
+        className="form-control form-search-input"
         placeholder="Enter search term.."
         onChange={handleChange}
         value={formData.searchFor}
