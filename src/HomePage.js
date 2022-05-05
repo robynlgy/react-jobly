@@ -16,8 +16,8 @@ function HomePage() {
                 ? <h2>Welcome Back, {currentUser.firstName}!</h2>
                 :
                 <div>
-                    <Link className="btn btn-primary" to="/login">Login</Link>
-                    <Link className="btn btn-primary" to="/signup">Sign Up</Link>
+                    <Link className="btn btn-primary mx-2" to="/login">Login</Link>
+                    <Link className="btn btn-primary mx-2" to="/signup">Sign Up</Link>
                 </div>}
         </section>
     )

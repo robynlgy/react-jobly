@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 /** Form component used for signing up user.
  * props: signup
@@ -10,9 +12,10 @@ function SignupForm({ signup }) {
     password: "",
     firstName: "",
     lastName: "",
-    email: ""
-  }
+    email: "",
+  };
   const [formData, setFormData] = useState(initialValue);
+  const navigate = useNavigate();
 
   /** Update form input. */
   function handleChange(evt) {
@@ -24,15 +27,18 @@ function SignupForm({ signup }) {
   }
 
   /** Call parent function. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signup(formData);
-    console.log("submitting")
-    setFormData(initialValue)
+    try {
+      signup(formData);
+      setFormData(initialValue);
+      navigate("/");
+    } catch (err) {
+      return <Alert errors={err} />;
+    }
   }
 
   const formInputsHTML = (
-
     <div className="mb-3">
       <label htmlFor="signup-username">Username: </label>
       <input
@@ -87,11 +93,13 @@ function SignupForm({ signup }) {
         aria-label="signup-form-email"
       />
     </div>
-
   );
 
   return (
-    <form className="SignupForm my-3 justify-content-center container" onSubmit={handleSubmit}>
+    <form
+      className="SignupForm my-3 justify-content-center container"
+      onSubmit={handleSubmit}
+    >
       {formInputsHTML}
       <button className="SignupForm-Btn btn-primary btn ms-3 py-1 btn-sm">
         Submit
@@ -100,4 +108,4 @@ function SignupForm({ signup }) {
   );
 }
 
-export default SignupForm
+export default SignupForm;

@@ -29,7 +29,9 @@ function App() {
   function logout() {
     setCurrentUser(null);
     setToken(null);
+    JoblyApi.token = null;
     setIsLoading(true);
+    localStorage.clear();
   }
 
   // async function updateProfile(formData) {
@@ -51,10 +53,15 @@ function App() {
           ...prevUser,
           ...response,
         }));
-        setIsLoading(false)
+        localStorage.setItem("token", token);
+        setIsLoading(false);
       }
-      if (isLoading && token) getNewUser();
-    },
+      setToken(localStorage.getItem("token")); // token would be null or token
+      console.log("token",token)
+      if (isLoading && token) {
+        console.log("in if statement")
+        getNewUser();
+    }},
     [token]
   );
 
@@ -67,7 +74,7 @@ function App() {
             signup={signup}
             login={login}
             logout={logout}
-          // updateProfile={updateProfile}
+            // updateProfile={updateProfile}
           />
         </BrowserRouter>
       </div>
