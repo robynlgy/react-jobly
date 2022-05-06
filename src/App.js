@@ -17,12 +17,8 @@ import LoadingSpinner from "./shared/LoadingSpinner";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [alerts, setAlerts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  function clearAlerts() {
-    setAlerts(null);
-  }
 
   async function signup(formData) {
     const response = await JoblyApi.signup(formData);
@@ -80,7 +76,7 @@ function App() {
     <UserContext.Provider value={{ currentUser }}>
       <div className="App">
         <BrowserRouter>
-          <NavBar logout={logout} clearAlerts={clearAlerts} />
+          <NavBar logout={logout} />
           <RoutesList
             signup={signup}
             login={login}
