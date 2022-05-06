@@ -1,72 +1,80 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 /** Form component used for logging in user.
  * props: login
  * state: formData
  */
 function LoginForm({ login }) {
-    const initialValue = {
-        username: "",
-        password: ""
+  const initialValue = {
+    username: "",
+    password: "",
+  };
+  const [formData, setFormData] = useState(initialValue);
+  const navigate = useNavigate();
+  const [alerts, setAlerts] = useState(null);
+
+  /** Update form input. */
+  function handleChange(evt) {
+    const { name, value } = evt.target;
+    setFormData((fData) => ({
+      ...fData,
+      [name]: value,
+    }));
+  }
+
+  /** Call parent function. */
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    try {
+      await login(formData);
+      navigate("/");
+    } catch (err) {
+      setAlerts(err);
     }
-    const [formData, setFormData] = useState(initialValue);
-    const navigate = useNavigate();
+  }
 
-    /** Update form input. */
-    function handleChange(evt) {
-        const { name, value } = evt.target;
-        setFormData((fData) => ({
-            ...fData,
-            [name]: value,
-        }));
-    }
+  const formInputsHTML = (
+    <div className="mb-3">
+      <label htmlFor="signup-username">Username: </label>
+      <input
+        id="signup-username"
+        name="username"
+        className="form-control"
+        placeholder="Enter username"
+        onChange={handleChange}
+        value={formData.username}
+        aria-label="signup-form-username"
+      />
+      <label htmlFor="signup-password">Password: </label>
+      <input
+        type="password"
+        id="signup-password"
+        name="password"
+        className="form-control"
+        placeholder="Enter password"
+        onChange={handleChange}
+        value={formData.password}
+        aria-label="signup-form-password"
+      />
+    </div>
+  );
 
-    /** Call parent function. */
-    function handleSubmit(evt) {
-        evt.preventDefault();
-        login(formData);
+  return (
+    <form
+      className="custom-form justify-content-center container bg-light"
+      onSubmit={handleSubmit}
+    >
+      {formInputsHTML}
 
-        setFormData(initialValue);
-        navigate("/");
-    }
+      {alerts && <Alert alerts={alerts} />}
 
-    const formInputsHTML = (
-
-        <div className="mb-3">
-            <label htmlFor="signup-username">Username: </label>
-            <input
-                id="signup-username"
-                name="username"
-                className="form-control"
-                placeholder="Enter username"
-                onChange={handleChange}
-                value={formData.username}
-                aria-label="signup-form-username"
-            />
-            <label htmlFor="signup-password">Password: </label>
-            <input
-                type="password"
-                id="signup-password"
-                name="password"
-                className="form-control"
-                placeholder="Enter password"
-                onChange={handleChange}
-                value={formData.password}
-                aria-label="signup-form-password"
-            />
-        </div>
-
-    );
-
-    return (
-        <form className="custom-form justify-content-center container bg-light" onSubmit={handleSubmit}>
-            {formInputsHTML}
-            <button className="LoginForm-Btn btn-primary btn ms-3 py-1 btn-sm">
-                Login
-            </button>
-        </form>
-    );
+      <button className="LoginForm-Btn btn-primary btn ms-3 py-1 btn-sm">
+        Login
+      </button>
+    </form>
+  );
 }
 
-export default LoginForm
+export default LoginForm;

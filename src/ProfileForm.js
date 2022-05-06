@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import { useContext } from "react";
 import UserContext from "./UserContext";
-import AlertContext from "./AlertContext";
 
 /** Form component used for updating user.
  * props: updateProfile
@@ -18,7 +16,7 @@ function ProfileForm({ updateProfile }) {
   };
 
   const [formData, setFormData] = useState(initialValue);
-  const { alerts } = useContext(AlertContext);
+  const [alerts, setAlerts] = useState(null);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -30,9 +28,14 @@ function ProfileForm({ updateProfile }) {
   }
 
   /** Call parent function. */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    updateProfile(formData);
+    try {
+      await updateProfile(formData);
+      setAlerts(["Successfully updated!"])
+    } catch (err) {
+      setAlerts(err);
+    }
   }
 
   const formInputsHTML = (
@@ -68,7 +71,6 @@ function ProfileForm({ updateProfile }) {
       />
       <label htmlFor="Update-email">Email: </label>
       <input
-        // type="email"
         id="Update-email"
         name="email"
         className="form-control"
@@ -85,10 +87,9 @@ function ProfileForm({ updateProfile }) {
       className="custom-form my-3 justify-content-center container bg-light"
       onSubmit={handleSubmit}
     >
-
       {formInputsHTML}
 
-      {alerts && <Alert />}
+      {alerts && <Alert alerts={alerts} />}
 
       <button className="UpdateForm-Btn btn-primary btn ms-3 py-1 btn-sm">
         Save Changes

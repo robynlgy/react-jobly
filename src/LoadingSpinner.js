@@ -3,10 +3,10 @@ import "./LoadingSpinner.css";
 /** Presentational loading spinner */
 function LoadingSpinner() {
   return (
-    <div class="LoadingSpinner-container">
+    <div className="LoadingSpinner-container">
       <svg
         role="status"
-        class="spinner animation-spin"
+        className="spinner animation-spin"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

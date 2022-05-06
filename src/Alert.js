@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import AlertContext from "./AlertContext";
 
-function Alert() {
-  const { alerts } = useContext(AlertContext);
+
+function Alert({alerts}) {
   const success = alerts.includes("Successfully updated!") ? true : false;
 
   if (success) {

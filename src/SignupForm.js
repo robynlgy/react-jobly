@@ -16,6 +16,7 @@ function SignupForm({ signup }) {
   };
   const [formData, setFormData] = useState(initialValue);
   const navigate = useNavigate();
+  const [alerts, setAlerts] = useState(null)
 
   /** Update form input. */
   function handleChange(evt) {
@@ -30,13 +31,12 @@ function SignupForm({ signup }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      signup(formData);
-      setFormData(initialValue);
+      await signup(formData);
       navigate("/");
     } catch (err) {
-      console.log("ERROR",err)
-      return <Alert errors={err} />;
+      setAlerts(err)
     }
+
   }
 
   const formInputsHTML = (
@@ -102,6 +102,9 @@ function SignupForm({ signup }) {
       onSubmit={handleSubmit}
     >
       {formInputsHTML}
+
+      {alerts && <Alert alerts={alerts} />}
+
       <button className="SignupForm-Btn btn-primary btn ms-3 py-1 btn-sm">
         Submit
       </button>

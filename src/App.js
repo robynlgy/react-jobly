@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList";
 import NavBar from "./NavBar";
 import UserContext from "./UserContext";
-import AlertContext from "./AlertContext";
 import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt from "jwt-decode";
@@ -18,37 +17,23 @@ import LoadingSpinner from "./LoadingSpinner";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [isLoading, setIsLoading] = useState(true);
   const [alerts, setAlerts] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-
-  function clearAlerts(){
-    setAlerts(null)
+  function clearAlerts() {
+    setAlerts(null);
   }
 
-
   async function signup(formData) {
-    setIsLoading(true);
-    try {
-      const response = await JoblyApi.signup(formData);
-      JoblyApi.token = response;
-      setToken(response);
-    } catch (err) {
-      setAlerts(err);
-    }
-    setIsLoading(false);
+    const response = await JoblyApi.signup(formData);
+    JoblyApi.token = response;
+    setToken(response);
   }
 
   async function login(formData) {
-    setIsLoading(true);
-    try {
-      const response = await JoblyApi.login(formData);
-      JoblyApi.token = response;
-      setToken(response);
-    } catch (err) {
-      setAlerts(err);
-    }
-    setIsLoading(false);
+    const response = await JoblyApi.login(formData);
+    JoblyApi.token = response;
+    setToken(response);
   }
 
   function logout() {
@@ -59,18 +44,11 @@ function App() {
   }
 
   async function updateProfile(formData) {
-    setIsLoading(true);
-    try {
-      const response = await JoblyApi.updateProfile(currentUser.username, {
-        ...formData,
-      });
+    const response = await JoblyApi.updateProfile(currentUser.username, {
+      ...formData,
+    });
 
-      setCurrentUser(response);
-      setAlerts(["Successfully updated!"])
-    } catch (err) {
-      setAlerts(err);
-    }
-    setIsLoading(false);
+    setCurrentUser(response);
   }
 
   /** useEffect runs on initial render and on changes in token state
@@ -81,7 +59,6 @@ function App() {
     function getUser() {
       async function getNewUser() {
         const username = jwt(token).username;
-        // JSON.parse(atob(token.split(".")[1])).username;
         const response = await JoblyApi.getUser(username);
         setCurrentUser({ ...response });
         localStorage.setItem("token", token);
@@ -97,10 +74,9 @@ function App() {
     [token]
   );
 
-  if (isLoading) return < LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <AlertContext.Provider value={{ alerts }}>
       <UserContext.Provider value={{ currentUser }}>
         <div className="App">
           <BrowserRouter>
@@ -114,7 +90,6 @@ function App() {
           </BrowserRouter>
         </div>
       </UserContext.Provider>
-    </AlertContext.Provider>
   );
 }
 
