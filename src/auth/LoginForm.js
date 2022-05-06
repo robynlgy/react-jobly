@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Alert from "./Alert";
+import Alert from "../shared/Alert";
 
 /** Form component used for logging in user.
  * props: login

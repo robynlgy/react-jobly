@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Alert from "./Alert";
+import Alert from "../shared/Alert";
 import { useContext } from "react";
-import UserContext from "./UserContext";
+import UserContext from "../shared/UserContext";
 
 /** Form component used for updating user.
  * props: updateProfile

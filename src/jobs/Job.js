@@ -7,7 +7,7 @@ function Job({ job }) {
       <div className=" text-start ">
         <h2>{job.title}</h2>
         {job.companyName && <h3>{job.companyName}</h3>}
-        <p>Salary: {job.salary}</p>
+        <p>Salary: ${job.salary && job.salary.toLocaleString("en")}</p>
         <p>Equity: {job.equity}</p>
       </div>
     </div>

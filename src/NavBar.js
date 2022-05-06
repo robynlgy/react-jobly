@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import UserContext from "./UserContext";
+import UserContext from "./shared/UserContext";
 
 /** Nav component with links to home, companies, and jobs components
  * props: logout

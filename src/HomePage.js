@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import UserContext from "./UserContext";
+import UserContext from "./shared/UserContext";
 
 /** Landing page component with simple banner */
 function HomePage() {

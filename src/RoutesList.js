@@ -1,13 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./HomePage";
-import Companies from "./Companies";
-import Company from "./Company";
-import Jobs from "./Jobs";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import ProfileForm from "./ProfileForm";
+import Companies from "./companies/Companies";
+import Company from "./companies/Company";
+import Jobs from "./jobs/Jobs";
+import LoginForm from "./auth/LoginForm";
+import SignupForm from "./auth/SignupForm";
+import ProfileForm from "./auth/ProfileForm";
 import { useContext } from "react";
-import UserContext from "./UserContext";
+import UserContext from "./shared/UserContext";
 
 /** List of possible endpoints in our app, along with associated components */
 function RoutesList({ signup, login, updateProfile }) {

@@ -6,6 +6,7 @@ import formErrorsMap from "./FormErrors";
  * state: none
  */
 function Alert({ alerts }) {
+  console.log(alerts);
   const success = alerts.includes("Successfully updated!") ? true : false;
   alerts = alerts.map((alert) =>
     formErrorsMap[alert] ? formErrorsMap[alert] : alert

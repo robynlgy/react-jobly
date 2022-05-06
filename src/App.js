@@ -3,11 +3,11 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList";
 import NavBar from "./NavBar";
-import UserContext from "./UserContext";
+import UserContext from "./shared/UserContext";
 import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt from "jwt-decode";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./shared/LoadingSpinner";
 
 /** App with user auth methods for jobly application
  *
@@ -77,19 +77,19 @@ function App() {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-      <UserContext.Provider value={{ currentUser }}>
-        <div className="App">
-          <BrowserRouter>
-            <NavBar logout={logout} clearAlerts={clearAlerts} />
-            <RoutesList
-              signup={signup}
-              login={login}
-              logout={logout}
-              updateProfile={updateProfile}
-            />
-          </BrowserRouter>
-        </div>
-      </UserContext.Provider>
+    <UserContext.Provider value={{ currentUser }}>
+      <div className="App">
+        <BrowserRouter>
+          <NavBar logout={logout} clearAlerts={clearAlerts} />
+          <RoutesList
+            signup={signup}
+            login={login}
+            logout={logout}
+            updateProfile={updateProfile}
+          />
+        </BrowserRouter>
+      </div>
+    </UserContext.Provider>
   );
 }
 
