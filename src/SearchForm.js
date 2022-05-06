@@ -20,6 +20,7 @@ function SearchForm({ searchFor, handleSearch }) {
   /** Call parent function. */
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (Object.values(formData)[0] === "") return;
     handleSearch(formData);
   }
 
@@ -38,9 +39,9 @@ function SearchForm({ searchFor, handleSearch }) {
   );
 
   return (
-    <form className="SearchForm my-3 d-flex justify-content-center" onSubmit={handleSubmit}>
+    <form className="SearchForm my-3 d-flex d-inline justify-content-center" onSubmit={handleSubmit}>
       {formInputsHTML}
-      <button className="SearchForm-Btn btn-primary btn ms-3 py-1 btn-sm">
+      <button className="SearchForm-Btn btn-primary btn ms-3 py-1 btn-med">
         Search
       </button>
     </form>
