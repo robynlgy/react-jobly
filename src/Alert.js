@@ -1,5 +1,9 @@
 
-
+/** Presentational Alert component
+ *
+ * props: alerts(list)
+ * state: none
+ */
 function Alert({alerts}) {
   const success = alerts.includes("Successfully updated!") ? true : false;
 

@@ -1,53 +1,94 @@
-import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
 import UserContext from "./UserContext";
 
 /** Nav component with links to home, companies, and jobs components
  * props: logout
  */
 function NavBar({ logout, clearAlerts }) {
+  //   const initialState = {
+  //     companies: "nav-link d-inline",
+  //     jobs: "nav-link d-inline",
+  //     profile: "nav-link d-inline",
+  //     login: "nav-link d-inline",
+  //     signup: "nav-link d-inline",
+  //   };
 
-    const initialState = {
-        companies: "nav-link d-inline",
-        jobs: "nav-link d-inline",
-        profile: "nav-link d-inline",
-        login: "nav-link d-inline",
-        signup: "nav-link d-inline"
-    }
+  //   const [isActive, setIsActive] = useState(initialState);
 
-    const { currentUser } = useContext(UserContext);
-    const [isActive, setIsActive] = useState(initialState);
+  const { currentUser } = useContext(UserContext);
+  let activeStyle = {
+    color: "blue",
+    fontWeight: "bold",
+  };
 
-    function handleClick(evt) {
+  //   function handleClick(evt) {
+  //     const currentNav = evt.target.innerHTML.toLowerCase();
+  //     setIsActive({ ...initialState, [currentNav]: "active nav-link d-inline " });
+  //   }
 
-        const currentNav = evt.target.innerHTML.toLowerCase();
-        setIsActive({ ...initialState, [currentNav]: "active nav-link d-inline " });
-    }
-
-    return (
-        <nav className="NavBar navbar navbar-dark bg-dark" onClick={clearAlerts}>
-            {currentUser
-                ? <div className="container">
-                    <Link className="navbar-brand d-inline" to="/">Jobly</Link>
-                    <div>
-                        <Link onClick={handleClick} className={isActive.companies} to="/companies">Companies</Link>
-                        <Link onClick={handleClick} className={isActive.jobs} to="/jobs">Jobs</Link>
-                        <Link onClick={handleClick} className={isActive.profile} to="/profile">Profile</Link>
-                        <button className="NavBar-logout nav-link bg-dark border-0 d-inline" onClick={logout}>Logout</button>
-                    </div>
-                </div>
-
-                : <div className="container">
-
-                    <Link className="navbar-brand d-inline" to="/">Jobly</Link>
-                    <div>
-                        <Link onClick={handleClick} className={isActive.login} to="/login">Login</Link>
-                        <Link onClick={handleClick} className={isActive.signup} to="/signup">Sign Up</Link>
-                    </div>
-                </div>}
-
-        </nav>
-    )
+  return (
+    <nav className="NavBar navbar navbar-dark bg-dark" onClick={clearAlerts}>
+      {currentUser ? (
+        <div className="container">
+          <NavLink className="navbar-brand d-inline" to="/" end>
+            Jobly
+          </NavLink>
+          <div>
+            <NavLink
+              className="nav-link d-inline"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/companies"
+            >
+              Companies
+            </NavLink>
+            <NavLink
+              className="nav-link d-inline"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/jobs"
+            >
+              Jobs
+            </NavLink>
+            <NavLink
+              className="nav-link d-inline"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/profile"
+            >
+              Profile
+            </NavLink>
+            <button
+              className="NavBar-logout nav-link bg-dark border-0 d-inline"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="container">
+          <NavLink className="navbar-brand d-inline" to="/" end>
+            Jobly
+          </NavLink>
+          <div>
+            <NavLink
+              className="nav-link d-inline"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/login"
+            >
+              Login
+            </NavLink>
+            <NavLink
+              className="nav-link d-inline"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              to="/signup"
+            >
+              Sign Up
+            </NavLink>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
 }
 
-export default NavBar
+export default NavBar;
