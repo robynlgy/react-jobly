@@ -44,7 +44,7 @@ function Jobs() {
   if (jobs.isLoading) return < LoadingSpinner />
 
   return (
-    <div>
+    <div className="pb-5">
       <SearchForm searchFor={"title"} handleSearch={handleSearch} />
       <JobsList jobs={jobs.jobsList} />
     </div>

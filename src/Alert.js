@@ -1,11 +1,15 @@
+import formErrorsMap from "./FormErrors";
 
 /** Presentational Alert component
  *
  * props: alerts(list)
  * state: none
  */
-function Alert({alerts}) {
+function Alert({ alerts }) {
   const success = alerts.includes("Successfully updated!") ? true : false;
+  alerts = alerts.map((alert) =>
+    formErrorsMap[alert] ? formErrorsMap[alert] : alert
+  );
 
   if (success) {
     return (

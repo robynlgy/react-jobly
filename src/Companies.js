@@ -44,7 +44,7 @@ function Companies() {
   if (companies.isLoading) return < LoadingSpinner />
 
   return (
-    <div>
+    <div className="pb-5">
       <SearchForm searchFor={"name"} handleSearch={handleSearch} />
       <CompaniesList companies={companies.companiesList} />
     </div>

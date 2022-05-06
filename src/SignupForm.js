@@ -84,7 +84,7 @@ function SignupForm({ signup }) {
       />
       <label htmlFor="signup-email">Email: </label>
       <input
-        type="email"
+        // type="email"
         id="signup-email"
         name="email"
         className="form-control"
