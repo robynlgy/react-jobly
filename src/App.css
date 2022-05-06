@@ -7,8 +7,8 @@ body {
   position: relative;
 }
 
-.CompanyCard{
-  color:rgb(56, 50, 50);
+.CompanyCard {
+  color: rgb(56, 50, 50);
 }
 
 a {
@@ -17,46 +17,53 @@ a {
 }
 
 
-.navbar-brand{
-  font-size:xx-large;
+.navbar-brand {
+  font-size: xx-large;
 }
 
-.nav-link{
-  font-size:large;
-  color:white;
+.nav-link {
+  font-size: large;
+  color: white;
 }
 
-.custom-form{
-  border-radius:20px;
+
+.active {
+  color: #0d6efd;
+}
+
+.custom-form {
+  border-radius: 20px;
   width: 40%;
   padding: 25px;
   margin-top: 100px;
 }
 
-.CompanyCard, .JobCard{
-  border-radius:20px;
+.CompanyCard,
+.JobCard {
+  border-radius: 20px;
 }
 
-label{
-  font-weight:bold
+label {
+  font-weight: bold
 }
 
-.form-control{
+.form-control {
   width: 50%;
-  text-align:center;
+  text-align: center;
   margin: 20px auto;
 }
 
 .form-search-input {
-  width:500px;
-  margin: 5px auto ;
+  width: 500px;
+  margin: 5px auto;
 }
-.SearchForm-Btn{
+
+.SearchForm-Btn {
   height: 36px;
   margin: auto 0;
 }
 
-.SearchForm{
+.SearchForm {
   height: 50px;
   width: 50%;
   margin: 10px auto;
@@ -77,7 +84,7 @@ label{
   margin-top: 300px;
   color: white;
   font-weight: bold;
-  text-shadow:#282c34 1px 1px
+  text-shadow: #282c34 1px 1px
 }
 
 .App-logo {
@@ -115,6 +122,3 @@ label{
     transform: rotate(360deg);
   }
 }
-
-
-
