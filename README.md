@@ -5,7 +5,7 @@ Jobly is a job search application built with a React front-end, Express RESTful 
 View working demo [here](https://jobly-robyn.surge.sh/).
 
 
-![Home page](./public/screenshots/Homepage.png "Homepage")
+![Home page](./public/screenshots/HomepageLoggedIn.png "Homepage")
 
 ### Technologies
 - React & React Router
