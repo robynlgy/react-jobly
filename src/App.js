@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt from "jwt-decode";
 import LoadingSpinner from "./shared/LoadingSpinner";
+import debounce from 'lodash.debounce';
 
 /** App with user auth methods for jobly application
  *
@@ -19,6 +20,28 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(true);
 
+  /** useEffect runs on initial render and on change in token state:
+   *  - makes request to API for user details from token payload
+   *  - updates currentUser and sets token in localStorage
+   */
+   useEffect(
+    function getUser() {
+      async function getNewUser() {
+        const username = jwt(token).username;
+        const response = await JoblyApi.getUser(username);
+        setCurrentUser({ ...response });
+        localStorage.setItem("token", token);
+        setIsLoading(false);
+      }
+      if (token) {
+        JoblyApi.token = token;
+        getNewUser();
+      } else {
+        setIsLoading(false);
+      }
+    },
+    [token]
+  );
 
   async function signup(formData) {
     const response = await JoblyApi.signup(formData);
@@ -46,29 +69,6 @@ function App() {
 
     setCurrentUser(response);
   }
-
-  /** useEffect runs on initial render and on changes in token state
-   *  - makes request to API for user details from token payload
-   *  - updates currentUser and sets token in localStorage
-   */
-  useEffect(
-    function getUser() {
-      async function getNewUser() {
-        const username = jwt(token).username;
-        const response = await JoblyApi.getUser(username);
-        setCurrentUser({ ...response });
-        localStorage.setItem("token", token);
-        setIsLoading(false);
-      }
-      if (token) {
-        JoblyApi.token = token;
-        getNewUser();
-      } else {
-        setIsLoading(false);
-      }
-    },
-    [token]
-  );
 
   if (isLoading) return <LoadingSpinner />;
 

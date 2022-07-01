@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 
 /** Presentation Component for creating list of CompanyCards
@@ -8,6 +8,11 @@ function CompaniesList({ companies }) {
   const [shownCompanies, setShownCompanies] = useState(companies.slice(0, 20));
   const numButts = Math.ceil(companies.length / 20);
   const buttsArray = Array.from({ length: numButts }, (v, i) => i + 1);
+  console.log("shownCompanies",shownCompanies)
+
+  useEffect(()=>{
+    setShownCompanies(companies.slice(0,20))
+  },[ companies ])
 
   function showNewBatch(evt) {
     const pageNum = +evt.target.innerHTML;

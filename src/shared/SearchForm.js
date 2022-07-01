@@ -1,26 +1,28 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import _debounce from 'lodash/debounce'
 
 /** Form component used for searching jobs/companies
- * props: searchFor, handleSearch
+ * props: handleSearch function
  * state: formData
  */
-function SearchForm({ searchFor, handleSearch }) {
-  const initialState = (searchFor === "name") ? { name: "" } : { title: "" };
-  const [formData, setFormData] = useState(initialState);
+function SearchForm({ handleSearch }) {
+  const [formData, setFormData] = useState('');
+  const debounceFn = useCallback(_debounce(handleDebounceFn, 1000),[])
 
+  function handleDebounceFn(formData){
+    handleSearch(formData)
+  }
   /** Update form input. */
   function handleChange(evt) {
-    const { name, value } = evt.target;
-    setFormData((fData) => ({
-      ...fData,
-      [name]: value,
-    }));
+    setFormData(evt.target.value);
+    debounceFn(evt.target.value);
   }
+
 
   /** Call parent function. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    if (Object.values(formData)[0] === "") return;
+    // if (Object.values(formData)[0] === "") return;
     handleSearch(formData);
   }
 
@@ -28,11 +30,11 @@ function SearchForm({ searchFor, handleSearch }) {
     <div className="mb-3">
       <input
         id="search-form"
-        name={searchFor}
+        name="search"
         className="form-control form-search-input"
         placeholder="Enter search term.."
         onChange={handleChange}
-        value={formData.searchFor}
+        value={formData}
         aria-label="search-form"
       />
     </div>

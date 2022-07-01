@@ -11,41 +11,34 @@ import LoadingSpinner from "../shared/LoadingSpinner";
  */
 function Companies() {
   const [companies, setCompanies] = useState({
-    companiesList: [],
-    searchQuery: {},
+    companiesList: null,
     isLoading: true,
   });
+  const [searchQuery,setSearchQuery]= useState(undefined)
 
   useEffect(
-    function getCompanies() {
+    () => {
       async function fetchCompaniesFromAPI() {
-        const companiesResp = await JoblyApi.getCompanies(
-          companies.searchQuery
-        );
-        setCompanies((prevComp) => ({
-          ...prevComp,
-          companiesList: [...companiesResp],
-          isLoading: false,
-        }));
+        const companiesResp = await JoblyApi.getCompanies(searchQuery);
+        setCompanies({
+          companiesList : companiesResp,
+          isLoading: false
+        });
       }
-      if (companies.isLoading) fetchCompaniesFromAPI();
+      fetchCompaniesFromAPI()
     },
-    [companies]
+    [ searchQuery ]
   );
 
-  function handleSearch(queries) {
-    setCompanies((prevComp) => ({
-      ...prevComp,
-      searchQuery: { ...queries },
-      isLoading: true,
-    }));
+  function handleSearch(query) {
+    setSearchQuery(query)
   }
 
   if (companies.isLoading) return < LoadingSpinner />
 
   return (
     <div className="pb-5">
-      <SearchForm searchFor={"name"} handleSearch={handleSearch} />
+      <SearchForm handleSearch={handleSearch} />
       <CompaniesList companies={companies.companiesList} />
     </div>
   );

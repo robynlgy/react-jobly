@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Job from "./Job";
 
 /** Presentational component that creates list of Job components
@@ -8,6 +8,10 @@ function JobsList({ jobs }) {
   const [shownJobs, setShownJobs] = useState(jobs.slice(0, 20));
   const numButts = Math.ceil(jobs.length / 20);
   const buttsArray = Array.from({ length: numButts }, (v, i) => i + 1);
+
+  useEffect(() => {
+    setShownJobs(jobs.slice(0, 20));
+  }, [jobs]);
 
   function showNewBatch(evt) {
     const pageNum = +evt.target.innerHTML;
