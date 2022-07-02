@@ -18,7 +18,7 @@ function NavBar({ logout }) {
 
   const { currentUser } = useContext(UserContext);
   let activeStyle = {
-    color: "#3a86ff",
+    color: "#f7ded3",
     fontWeight: "bold",
   };
 
@@ -28,7 +28,7 @@ function NavBar({ logout }) {
   //   }
 
   return (
-    <nav className="NavBar navbar navbar-dark bg-dark">
+    <nav className="NavBar navbar navbar-dark sticky-top">
       {currentUser ? (
         <div className="container">
           <NavLink className="navbar-brand d-inline" to="/" end>
@@ -57,7 +57,7 @@ function NavBar({ logout }) {
               Profile
             </NavLink>
             <button
-              className="NavBar-logout nav-link bg-dark border-0 d-inline"
+              className="NavBar-logout nav-link border-0 d-inline"
               onClick={logout}
             >
               Logout

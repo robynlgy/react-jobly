@@ -14,7 +14,8 @@ function Companies() {
     companiesList: null,
     isLoading: true,
   });
-  const [searchQuery,setSearchQuery]= useState(undefined)
+  const [searchQuery,setSearchQuery]= useState(null)
+  if(companies.companiesList) console.log(companies.companiesList.length)
 
   useEffect(
     () => {
@@ -31,6 +32,7 @@ function Companies() {
   );
 
   function handleSearch(query) {
+    if (!query) query = null
     setSearchQuery(query)
   }
 

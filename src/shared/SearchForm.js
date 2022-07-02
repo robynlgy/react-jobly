@@ -7,6 +7,7 @@ import _debounce from 'lodash/debounce'
  */
 function SearchForm({ handleSearch }) {
   const [formData, setFormData] = useState('');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceFn = useCallback(_debounce(handleDebounceFn, 1000),[])
 
   function handleDebounceFn(formData){
@@ -22,7 +23,6 @@ function SearchForm({ handleSearch }) {
   /** Call parent function. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    // if (Object.values(formData)[0] === "") return;
     handleSearch(formData);
   }
 
