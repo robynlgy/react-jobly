@@ -15,7 +15,6 @@ function Companies() {
     isLoading: true,
   });
   const [searchQuery,setSearchQuery]= useState(null)
-  if(companies.companiesList) console.log(companies.companiesList.length)
 
   useEffect(
     () => {

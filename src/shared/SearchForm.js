@@ -43,7 +43,7 @@ function SearchForm({ handleSearch }) {
   return (
     <form className="SearchForm my-3 d-flex d-inline justify-content-center" onSubmit={handleSubmit}>
       {formInputsHTML}
-      <button className="SearchForm-Btn btn-primary btn ms-3 py-1 btn-med">
+      <button className="SearchForm-Btn btn-outline-dark btn ms-3 py-1 btn-med">
         Search
       </button>
     </form>

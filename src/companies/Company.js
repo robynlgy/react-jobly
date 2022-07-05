@@ -29,10 +29,10 @@ function Company() {
 
   return (
     <div className="mt-5">
-      <h1 style={{ color: "white", "textShadow": "#282c34 1px 1px" }}>
+      <h1 style={{ color: "white", "textShadow": "black 1px 1px 10px" }}>
         {company.data.name}
       </h1>
-      <p style={{ color: "white", "textShadow": "#282c34 1px 1px" }}>{company.data.description}</p>
+      <p style={{ color: "white", "textShadow": "black 1px 0 10px" }}>{company.data.description}</p>
       <JobsList jobs={company.data.jobs} />
     </div>
   );

@@ -91,7 +91,15 @@ label {
   min-height: 100vh;
 }
 
+/* Homepage */
 .HomePage {
   margin-top: 15%;
-  /* text-shadow: #282c34 1px 1px */
+}
+
+.HomePage-jobly {
+  text-shadow: #383232b2 1px 1px
+}
+/* Pagination */
+.page-link, .page-link:hover {
+  color: #383232
 }

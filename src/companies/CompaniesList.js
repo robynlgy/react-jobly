@@ -8,7 +8,6 @@ function CompaniesList({ companies }) {
   const [shownCompanies, setShownCompanies] = useState(companies.slice(0, 20));
   const numButts = Math.ceil(companies.length / 20);
   const buttsArray = Array.from({ length: numButts }, (v, i) => i + 1);
-  console.log("shownCompanies",shownCompanies)
 
   useEffect(()=>{
     setShownCompanies(companies.slice(0,20))

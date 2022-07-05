@@ -105,7 +105,7 @@ function SignupForm({ signup }) {
 
       {alerts && <Alert alerts={alerts} />}
 
-      <button className="SignupForm-Btn btn-primary btn ms-3 py-1 btn-sm">
+      <button className="SignupForm-Btn btn-outline-dark btn ms-3 py-1 btn-sm">
         Submit
       </button>
     </form>

@@ -91,7 +91,7 @@ function ProfileForm({ updateProfile }) {
 
       {alerts && <Alert alerts={alerts} />}
 
-      <button className="UpdateForm-Btn btn-primary btn ms-3 py-1 btn-sm">
+      <button className="UpdateForm-Btn btn-outline-dark btn ms-3 py-1 btn-sm">
         Save Changes
       </button>
     </form>

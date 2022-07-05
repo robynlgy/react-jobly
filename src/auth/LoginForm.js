@@ -70,7 +70,7 @@ function LoginForm({ login }) {
 
       {alerts && <Alert alerts={alerts} />}
 
-      <button className="LoginForm-Btn btn-primary btn ms-3 py-1 btn-sm">
+      <button className="LoginForm-Btn btn-outline-dark btn ms-3 py-1 btn-sm">
         Login
       </button>
     </form>
